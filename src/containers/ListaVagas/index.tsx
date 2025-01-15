@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import FormVagas from '../../components/FormVagas'
-
 import Vaga from '../../components/Vaga'
-
-import styles from './ListaVagas.module.css'
+import Ul from './styles'
 
 type Vaga = {
   id: string
@@ -11,108 +9,108 @@ type Vaga = {
   localizacao: string
   nivel: string
   modalidade: string
-  salarioMin: number
-  salarioMax: number
+  salarioMin: string
+  salarioMax: string
   requisitos: string[]
 }
 
-const vagas = [
+const jobs = [
   {
     id: 1,
-    titulo: 'Desenvolvedor front-end',
-    localizacao: 'remoto',
-    nivel: 'junior',
-    modalidade: 'clt',
-    salarioMin: 3000,
-    salarioMax: 4500,
+    titulo: 'Desenvolvedor(a) Front-end',
+    localizacao: 'Remoto',
+    nivel: 'Júnior',
+    modalidade: 'CLT',
+    salarioMin: 'R$ 3.000,00',
+    salarioMax: 'R$ 4.500,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 2,
-    titulo: 'Desenvolvedor NodeJS',
-    localizacao: 'remoto',
-    nivel: 'pleno',
-    modalidade: 'pj',
-    salarioMin: 5000,
-    salarioMax: 6500,
+    titulo: 'Desenvolvedor(a) Node.js',
+    localizacao: 'Remoto',
+    nivel: 'Pleno',
+    modalidade: 'PJ',
+    salarioMin: 'R$ 5.000,00',
+    salarioMax: 'R$ 6.500,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 3,
-    titulo: 'Desenvolvedor fullstack',
-    localizacao: 'remoto',
-    nivel: 'pleno',
-    modalidade: 'pj',
-    salarioMin: 4000,
-    salarioMax: 6000,
+    titulo: 'Desenvolvedor(a) Fullstack',
+    localizacao: 'Remoto',
+    nivel: 'Pleno',
+    modalidade: 'PJ',
+    salarioMin: 'R$ 4.000,00',
+    salarioMax: 'R$ 6.000,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 4,
-    titulo: 'Designer de interfaces',
-    localizacao: 'remoto',
-    nivel: 'junior',
-    modalidade: 'clt',
-    salarioMin: 4000,
-    salarioMax: 5000,
+    titulo: 'Designer de Interfaces',
+    localizacao: 'Remoto',
+    nivel: 'Júnior',
+    modalidade: 'CLT',
+    salarioMin: 'R$ 4.000,00',
+    salarioMax: 'R$ 5.000,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 5,
-    titulo: 'Desenvolvedor front-end',
-    localizacao: 'remoto',
-    nivel: 'senior',
-    modalidade: 'clt',
-    salarioMin: 7000,
-    salarioMax: 8000,
+    titulo: 'Desenvolvedor(a) Front-end',
+    localizacao: 'Remoto',
+    nivel: 'Sênior',
+    modalidade: 'CLT',
+    salarioMin: 'R$ 7.000,00',
+    salarioMax: 'R$ 8.000,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 6,
-    titulo: 'Desenvolvedor front-end para projeto internacional',
-    localizacao: 'remoto',
-    nivel: 'senior',
-    modalidade: 'pj',
-    salarioMin: 12000,
-    salarioMax: 15000,
+    titulo: 'Desenvolvedor(a) Front-end para Projetos Internacionais',
+    localizacao: 'Remoto',
+    nivel: 'Sênior',
+    modalidade: 'PJ',
+    salarioMin: 'R$ 12.000,00',
+    salarioMax: 'R$ 15.000,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
     id: 7,
-    titulo: 'Desenvolvedor front-end',
+    titulo: 'Desenvolvedor(a) Front-end',
     localizacao: 'São Paulo/SP',
-    nivel: 'junior',
-    modalidade: 'clt',
-    salarioMin: 4000,
-    salarioMax: 5000,
+    nivel: 'Júnior',
+    modalidade: 'CLT',
+    salarioMin: 'R$ 4.000,00',
+    salarioMax: 'R$ 5.000,00',
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   }
 ]
 
 const ListaVagas = () => {
-  const [filtro, setFiltro] = useState<string>('')
+  const [filter, setFilter] = useState<string>('')
 
-  const vagasFiltradas = vagas.filter(
-    (x) => x.titulo.toLocaleLowerCase().search(filtro) >= 0
+  const filtered = jobs.filter(
+    (x) => x.titulo.toLocaleLowerCase().search(filter) >= 0
   )
 
   return (
     <div>
-      <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-      <ul className={styles.vagas}>
-        {vagasFiltradas.map((vag) => (
+      <FormVagas search={(term: string) => setFilter(term)} />
+      <Ul>
+        {filtered.map((job) => (
           <Vaga
-            key={vag.id}
-            titulo={vag.titulo}
-            localizacao={vag.localizacao}
-            nivel={vag.nivel}
-            modalidade={vag.modalidade}
-            salarioMin={vag.salarioMin}
-            salarioMax={vag.salarioMax}
-            requisitos={vag.requisitos}
+            key={job.id}
+            titulo={job.titulo}
+            localizacao={job.localizacao}
+            nivel={job.nivel}
+            modalidade={job.modalidade}
+            salarioMin={job.salarioMin}
+            salarioMax={job.salarioMax}
+            requisitos={job.requisitos}
           />
         ))}
-      </ul>
+      </Ul>
     </div>
   )
 }
